@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49657AC0-6CC0-4A92-A863-78510DDC606C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Doubi.Data</RootNamespace>
+    <AssemblyName>Doubi.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentData">
+      <HintPath>..\packages\FluentData.3.0.0.0\lib\FluentData.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\Base\LevelRepository.cs" />
+    <Compile Include="DAL\Base\OrderChargeDoubiRepository.cs" />
+    <Compile Include="DAL\Base\OrderPaymentCardRepository.cs" />
+    <Compile Include="DAL\Base\OrderPaymentRepository.cs" />
+    <Compile Include="DAL\Base\OrderPaymentReturnRepository.cs" />
+    <Compile Include="DAL\Base\OrderProductRepository.cs" />
+    <Compile Include="DAL\Base\OrderRepository.cs" />
+    <Compile Include="DAL\Base\OrderReturnCardRepository.cs" />
+    <Compile Include="DAL\Base\OrderShippingRepository.cs" />
+    <Compile Include="DAL\Base\PaymentCardDetailRepository.cs" />
+    <Compile Include="DAL\Base\PaymentCardRepository.cs" />
+    <Compile Include="DAL\Base\PaymentRepository.cs" />
+    <Compile Include="DAL\Base\ProductRepository.cs" />
+    <Compile Include="DAL\Base\ProductSupplierRepository.cs" />
+    <Compile Include="DAL\Base\ProductTypeRepository.cs" />
+    <Compile Include="DAL\Base\ShoppingCartRepository.cs" />
+    <Compile Include="DAL\Base\SiteAdminRepository.cs" />
+    <Compile Include="DAL\Base\SiteNewsRepository.cs" />
+    <Compile Include="DAL\Base\UserAccountLogRepository.cs" />
+    <Compile Include="DAL\Base\UserAccountRepository.cs" />
+    <Compile Include="DAL\Base\UserMessageRepository.cs" />
+    <Compile Include="DAL\Base\UserRecommandRepository.cs" />
+    <Compile Include="DAL\Base\UserRepository.cs" />
+    <Compile Include="DAL\Base\UserSecondRecommandRepository.cs" />
+    <Compile Include="DAL\LevelRepository.cs" />
+    <Compile Include="DAL\OrderChargeDoubiRepository.cs" />
+    <Compile Include="DAL\OrderPaymentCardRepository.cs" />
+    <Compile Include="DAL\OrderPaymentRepository.cs" />
+    <Compile Include="DAL\OrderPaymentReturnRepository.cs" />
+    <Compile Include="DAL\OrderProductRepository.cs" />
+    <Compile Include="DAL\OrderRepository.cs" />
+    <Compile Include="DAL\OrderReturnCardRepository.cs" />
+    <Compile Include="DAL\OrderShippingRepository.cs" />
+    <Compile Include="DAL\PaymentCardDetailRepository.cs" />
+    <Compile Include="DAL\PaymentCardRepository.cs" />
+    <Compile Include="DAL\PaymentRepository.cs" />
+    <Compile Include="DAL\ProductRepository.cs" />
+    <Compile Include="DAL\ProductSupplierRepository.cs" />
+    <Compile Include="DAL\ProductTypeRepository.cs" />
+    <Compile Include="DAL\ShoppingCartRepository.cs" />
+    <Compile Include="DAL\SiteAdminRepository.cs" />
+    <Compile Include="DAL\SiteNewsRepository.cs" />
+    <Compile Include="DAL\UserAccountLogRepository.cs" />
+    <Compile Include="DAL\UserAccountRepository.cs" />
+    <Compile Include="DAL\UserMessageRepository.cs" />
+    <Compile Include="DAL\UserRecommandRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="DAL\UserSecondRecommandRepository.cs" />
+    <Compile Include="DBSettings.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Doubi.Core\Doubi.Core.csproj">
+      <Project>{ed19d173-e317-4006-a03f-8c0451211222}</Project>
+      <Name>Doubi.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

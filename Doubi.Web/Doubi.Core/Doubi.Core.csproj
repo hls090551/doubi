@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ED19D173-E317-4006-A03F-8C0451211222}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Doubi.Core</RootNamespace>
+    <AssemblyName>Doubi.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fasterflect">
+      <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="Pinyin4net">
+      <HintPath>..\packages\pinyin4net.1.0.0\lib\net40\Pinyin4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\MultiMap.cs" />
+    <Compile Include="Collections\QuerystringBuilder.cs" />
+    <Compile Include="Collections\ThreadSafeList.cs" />
+    <Compile Include="Collections\TreeNode.cs" />
+    <Compile Include="Domain\Base\Level.cs" />
+    <Compile Include="Domain\Base\Order.cs" />
+    <Compile Include="Domain\Base\OrderChargeDoubi.cs" />
+    <Compile Include="Domain\Base\OrderPayment.cs" />
+    <Compile Include="Domain\Base\OrderPaymentCard.cs" />
+    <Compile Include="Domain\Base\OrderPaymentReturn.cs" />
+    <Compile Include="Domain\Base\OrderProduct.cs" />
+    <Compile Include="Domain\Base\OrderReturnCard.cs" />
+    <Compile Include="Domain\Base\OrderShipping.cs" />
+    <Compile Include="Domain\Base\Payment.cs" />
+    <Compile Include="Domain\Base\PaymentCard.cs" />
+    <Compile Include="Domain\Base\PaymentCardDetail.cs" />
+    <Compile Include="Domain\Base\Product.cs" />
+    <Compile Include="Domain\Base\ProductSupplier.cs" />
+    <Compile Include="Domain\Base\ProductType.cs" />
+    <Compile Include="Domain\Base\ShoppingCart.cs" />
+    <Compile Include="Domain\Base\SiteAdmin.cs" />
+    <Compile Include="Domain\Base\SiteNews.cs" />
+    <Compile Include="Domain\Base\User.cs" />
+    <Compile Include="Domain\Base\UserAccount.cs" />
+    <Compile Include="Domain\Base\UserAccountLog.cs" />
+    <Compile Include="Domain\Base\UserMessage.cs" />
+    <Compile Include="Domain\Base\UserRecommand.cs" />
+    <Compile Include="Domain\Base\UserSecondRecommand.cs" />
+    <Compile Include="Domain\SecuritySettings.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
+    <Compile Include="Infrastructure\ComparableObject.cs" />
+    <Compile Include="Infrastructure\DateRange.cs" />
+    <Compile Include="Infrastructure\DisposableObject.cs" />
+    <Compile Include="Infrastructure\EnumFriendlyNameAttribute.cs" />
+    <Compile Include="Infrastructure\Error.cs" />
+    <Compile Include="Infrastructure\EventBroker.cs" />
+    <Compile Include="Infrastructure\Guard.cs" />
+    <Compile Include="Infrastructure\ICloneable.cs" />
+    <Compile Include="Infrastructure\IEngine.cs" />
+    <Compile Include="Infrastructure\IOrdered.cs" />
+    <Compile Include="Infrastructure\IStartupTask.cs" />
+    <Compile Include="Infrastructure\ITypeFinder.cs" />
+    <Compile Include="Infrastructure\Misc.cs" />
+    <Compile Include="Infrastructure\ObjectSignatureAttribute.cs" />
+    <Compile Include="Infrastructure\RegularExpressions.cs" />
+    <Compile Include="Infrastructure\Singleton.cs" />
+    <Compile Include="Infrastructure\SmartStoreEngine.cs" />
+    <Compile Include="Infrastructure\ValueObject.cs" />
+    <Compile Include="MyEnum\MessageType.cs" />
+    <Compile Include="MyEnum\OrderStatus.cs" />
+    <Compile Include="MyEnum\Ordertype.cs" />
+    <Compile Include="MyEnum\PaymentCardType.cs" />
+    <Compile Include="MyEnum\PaymentStatus.cs" />
+    <Compile Include="MyEnum\PaymentType.cs" />
+    <Compile Include="MyEnum\ProductSupplierType.cs" />
+    <Compile Include="MyEnum\ProductType.cs" />
+    <Compile Include="MyEnum\UserAccountOperateType.cs" />
+    <Compile Include="MyEnum\UserStatus.cs" />
+    <Compile Include="MyEventArgs\EntityEventArgs.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\ConversionExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\HtmlTextWriterExtensions.cs" />
+    <Compile Include="Extensions\HttpExtensions.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\MiscExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeDescriptorExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\XmlNodeExtensions.cs" />
+    <Compile Include="Extensions\XmlWriterExtensions.cs" />
+    <Compile Include="PagedList\IPageable.cs" />
+    <Compile Include="PagedList\IPagedList.cs" />
+    <Compile Include="PagedList\PagedList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ActionDisposable.cs" />
+    <Compile Include="Utilities\AppConfig.cs" />
+    <Compile Include="Utilities\CaptchaImage.cs" />
+    <Compile Include="Utilities\CaptchaToken.cs" />
+    <Compile Include="Utilities\CollectionHelper.cs" />
+    <Compile Include="Utilities\DateTimeConvert.cs" />
+    <Compile Include="Utilities\DictionaryConverter.cs" />
+    <Compile Include="Utilities\ExcelHelper.cs" />
+    <Compile Include="Utilities\ICaptchaImage.cs" />
+    <Compile Include="Utilities\Inflector.cs" />
+    <Compile Include="Utilities\IP.cs" />
+    <Compile Include="Utilities\Prettifier.cs" />
+    <Compile Include="Utilities\Range.cs" />
+    <Compile Include="Utilities\StringHelper.cs" />
+    <Compile Include="Utilities\StringTokenizer.cs" />
+    <Compile Include="Utilities\Threading\LockExtensions.cs" />
+    <Compile Include="Utilities\Threading\ReadLockDisposable.cs" />
+    <Compile Include="Utilities\Threading\UpgradeableReadLockDisposable.cs" />
+    <Compile Include="Utilities\Threading\WriteLockDisposable.cs" />
+    <Compile Include="Utilities\TypeHelper.cs" />
+    <Compile Include="Utilities\Wildcard.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
+    <Folder Include="ThirdParty\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
