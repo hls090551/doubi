@@ -10,7 +10,7 @@ namespace Doubi.Web.Controllers
     {       
         public ActionResult Index()
         {
-            Doubi.Service.level.LevelService ls = new Service.level.LevelService();
+           Doubi.Service.level.LevelService ls = new Doubi.Service.level.LevelService();
             var levels= ls.All_levels();
             ViewData["level"] = levels;
             return View();
