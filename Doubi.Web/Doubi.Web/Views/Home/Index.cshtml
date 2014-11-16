@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-
+@using Doubi.Core.Domain;
 <!DOCTYPE html>
 
 <html>
@@ -12,6 +12,12 @@
 <body>
     <div>
         首页
+        @{var level = ViewData["level"] as List<Level>;
+          foreach (var item in level)
+          {
+            <span>@item.Desc</span>
+          }
+        }
     </div>
 </body>
 </html>
