@@ -36,6 +36,15 @@ namespace Doubi.Service.Users
             return _userRepository.GetByUsername(username, status);
         }
 
+        public User GetUserByName(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return null;
+            }
+            return _userRepository.GetByUsername(username);
+        }
+
         public User GetUserid(int userid)
         {
             if (userid <= 0)
@@ -94,9 +103,18 @@ namespace Doubi.Service.Users
                 user.Createtime = DateTime.Now;
                 user.Lastlogintime = DateTime.Now;
 
+                //2.user_account
+                UserAccount account = new UserAccount();
+                account.Balance = 0;
+                account.Paypassword = string.Empty;
+                account.Salt = string.Empty;
+
                 using (var context = DBSettings.TransactionContext())
                 {
                     _userRepository.InsertWithTransaction(user, context);
+                    account.Userid = user.Id;
+                    _useraccountRep.InsertWithTransaction(account, context);
+
                     if (reco_id != null && reco_id > 0)
                     {
                         user.Recommanderid = (int)reco_id;

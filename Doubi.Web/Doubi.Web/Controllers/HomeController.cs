@@ -13,5 +13,10 @@ namespace Doubi.Web.Controllers
            
             return View();
         }
+
+        public void test()
+        {
+            
+        }
     }
 }

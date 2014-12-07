@@ -94,7 +94,7 @@ namespace Doubi.Web.Controllers
 
         //在进入页面前操作的方法
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
+        {            
             base.OnActionExecuting(filterContext);
             if (Session["CurrentUser"] == null)
             {
@@ -102,9 +102,12 @@ namespace Doubi.Web.Controllers
                 {                    
                         //根据cookie把用户加入session
                         UserService _us = new UserService();
-                        Session["CurrentUser"] = _us.GetUserByName(Request.Cookies["CurrentUsername"].Value,(int)UserStatus.Normal);
-                      
-                        ViewData["Username"] = (Session["CurrentUser"] as User).Username;                                   
+                        var user = _us.GetUserByName(HttpUtility.UrlDecode(Request.Cookies["CurrentUsername"].Value), (int)UserStatus.Normal);
+                        if (user != null)
+                        {
+                            Session["CurrentUser"] = user;
+                            ViewData["Username"] = (Session["CurrentUser"] as User).Username;   
+                        }                                                        
                 }
                 else
                 {

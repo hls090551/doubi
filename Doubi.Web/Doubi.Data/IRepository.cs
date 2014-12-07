@@ -31,7 +31,7 @@ namespace Doubi.Data
         /// </summary>
         /// <param name="entity">domian对象</param>
         /// <param name="context"></param>
-        void InsertWithTransaction(T entity, IDbContext context);
+        //void InsertWithTransaction(T entity, IDbContext context);
 
         /// <summary>
         /// 在数据库中批量保存新增对象

@@ -30,6 +30,21 @@ namespace Doubi.Data.DAL
             }
         }
 
+        public T GetByUsername(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentNullException("UserRepository.GetByUsername args error");
+            }
+
+            using (var context = Context())
+            {
+                return context.Sql(" select * from user_user where  username=@username")
+                                .Parameter("username", username)
+                                .QuerySingle<T>();
+            }
+        }
+
         /// <summary>
         /// 根据手机号码获取用户
         /// </summary>

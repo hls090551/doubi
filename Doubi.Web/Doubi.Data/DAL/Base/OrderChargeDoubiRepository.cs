@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Doubi.Data.DAL
 {
-    public partial class OrderChargeDoubiRepository<T> : IRepository<T> where T : OrderChargeDoubi
+    public partial class OrderChargeDoubiRepository<T> : IRepository<T> where T : OrderCharge
     {
         public delegate void EntityEventHandler(object sender, EntityEventArgs<T> e);
 
@@ -62,8 +62,7 @@ namespace Doubi.Data.DAL
             {
                 int id = context.Insert("order_charge_doubi")
                         .Column("orderid",entity.Orderid)
-                        .Column("userid",entity.Userid)
-                        .Column("useraccountid",entity.Useraccountid)
+                        .Column("userid",entity.Userid)                        
                         .Column("chargeamount",entity.Chargeamount)
                         .Column("createtime",entity.Createtime)
                         .ExecuteReturnLastId<int>();
@@ -80,8 +79,7 @@ namespace Doubi.Data.DAL
 
             int id = context.Insert("order_charge_doubi")
                         .Column("orderid",entity.Orderid)
-                        .Column("userid",entity.Userid)
-                        .Column("useraccountid",entity.Useraccountid)
+                        .Column("userid",entity.Userid)                       
                         .Column("chargeamount",entity.Chargeamount)
                         .Column("createtime",entity.Createtime)
                     .ExecuteReturnLastId<int>();
@@ -99,8 +97,7 @@ namespace Doubi.Data.DAL
 
             int id = context.Insert("order_charge_doubi")
                         .Column("orderid",entity.Orderid)
-                        .Column("userid",entity.Userid)
-                        .Column("useraccountid",entity.Useraccountid)
+                        .Column("userid",entity.Userid)                       
                         .Column("chargeamount",entity.Chargeamount)
                         .Column("createtime",entity.Createtime)
                     .ExecuteReturnLastId<int>();
@@ -153,8 +150,7 @@ namespace Doubi.Data.DAL
             {
                 return context.Update("order_charge_doubi")
                         .Column("orderid",entity.Orderid)
-                        .Column("userid",entity.Userid)
-                        .Column("useraccountid",entity.Useraccountid)
+                        .Column("userid",entity.Userid)                        
                         .Column("chargeamount",entity.Chargeamount)
                         .Column("createtime",entity.Createtime)
                     .Where("Id",entity.Id)
@@ -172,8 +168,7 @@ namespace Doubi.Data.DAL
 
             context.Update("order_charge_doubi")
                         .Column("orderid",entity.Orderid)
-                        .Column("userid",entity.Userid)
-                        .Column("useraccountid",entity.Useraccountid)
+                        .Column("userid",entity.Userid)                        
                         .Column("chargeamount",entity.Chargeamount)
                         .Column("createtime",entity.Createtime)
                      .Where("Id",entity.Id)

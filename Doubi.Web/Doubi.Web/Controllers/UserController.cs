@@ -49,7 +49,7 @@ namespace Doubi.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password, string checkbox, string vcode)
+        public ActionResult Login(string username, string password, string checkbox)
         {
             string redirecturl = (string)TempData["referurl"];
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -58,25 +58,25 @@ namespace Doubi.Web.Controllers
                 return View();
             }
 
-            if (Session["Vcode"] == null)
-            {
-                ViewData["errormsg"] = "验证码错误！";
-                return View();
-            }
-            string code = (string)Session["Vcode"];
+            //if (Session["Vcode"] == null)
+            //{
+            //    ViewData["errormsg"] = "验证码错误！";
+            //    return View();
+            //}
+            //string code = (string)Session["Vcode"];
 
-            if (string.IsNullOrWhiteSpace(vcode))
-            {
-                ViewData["errormsg"] = "验证码错误！";
-                return View();
-            }
-            bool v_res = code.Equals(vcode, StringComparison.OrdinalIgnoreCase);
-            if (!v_res)
-            {
-                Session["Vcode"] = null;
-                ViewData["errormsg"] = "验证码错误！";
-                return View();
-            }
+            //if (string.IsNullOrWhiteSpace(vcode))
+            //{
+            //    ViewData["errormsg"] = "验证码错误！";
+            //    return View();
+            //}
+            //bool v_res = code.Equals(vcode, StringComparison.OrdinalIgnoreCase);
+            //if (!v_res)
+            //{
+            //    Session["Vcode"] = null;
+            //    ViewData["errormsg"] = "验证码错误！";
+            //    return View();
+            //}
             //登录
             var result = _us.ValidatUser(username, password);
             if (result != null)
@@ -88,7 +88,7 @@ namespace Doubi.Web.Controllers
                 {
                     HttpCookie cookie = new HttpCookie("CurrentUsername");
                     cookie.Value = username;
-                    cookie.Expires = DateTime.Now.AddDays(30);
+                    cookie.Expires = DateTime.Now.AddDays(7);
                     Response.Cookies.Add(cookie);
                 }
                 //跳转到之前的页面 
@@ -115,6 +115,20 @@ namespace Doubi.Web.Controllers
             return View();
         }
 
+        public string Checkusername(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return AjaxReturn(-1, "用户名不能为空");
+            }
+            var user = _us.GetUserByName(username);
+            if (user == null)
+            {
+                return AjaxReturn(0, "用户名尚未被使用");
+            }
+            return AjaxReturn(-1, "用户名已经被使用");
+        }
+
         public ActionResult Regist()
         {
             if (Session["CurrentUser"] != null)
@@ -134,31 +148,37 @@ namespace Doubi.Web.Controllers
         /// <param name="reco_id">推荐人id</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Regist(string username, string pwd, string mobile, string m_vcode, int? reco_id)
+        public ActionResult Regist(string username, string pwd, string mobile, string m_vcode)
         {
+            string recoId = Request.QueryString["recoId"];
+            int reco_id = 0;
+            if (!string.IsNullOrWhiteSpace(recoId))
+            {
+                reco_id = Convert.ToInt32(recoId);
+            }
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(pwd) || string.IsNullOrWhiteSpace(mobile) || string.IsNullOrWhiteSpace(m_vcode))
             {
                 ViewData["errormsg"] = "提交参数有误！";
                 return View();
             }
             //校验码判断
-            if (Session["verify_code"] == null)
-            {
-                ViewData["errormsg"] = "手机校验码失效，请重新获取！";
-                return View();
-            }
-            string verify_code = (string)Session["verify_code"];
-            if (!verify_code.Equals(mobile + m_vcode))
-            {
-                ViewData["errormsg"] = "校验码错误，请输入正确的手机验证码！";
-                return View();
-            }
+            //if (Session["verify_code"] == null)
+            //{
+            //    ViewData["errormsg"] = "手机校验码失效，请重新获取！";
+            //    return View();
+            //}
+            //string verify_code = (string)Session["verify_code"];
+            //if (!verify_code.Equals(mobile + m_vcode))
+            //{
+            //    ViewData["errormsg"] = "校验码错误，请输入正确的手机验证码！";
+            //    return View();
+            //}
             User user = _us.Regist(username, pwd, mobile, reco_id);
             if (user != null)
             {
                 HttpCookie cookie = new HttpCookie("CurrentUsername");
-                cookie.Value = username;
-                cookie.Expires = DateTime.Now.AddDays(30);
+                cookie.Value = HttpUtility.UrlEncode(username);
+                cookie.Expires = DateTime.Now.AddDays(7);
                 Response.Cookies.Add(cookie);
 
                 Session["CurrentUser"] = user;
@@ -243,6 +263,6 @@ namespace Doubi.Web.Controllers
                 return AjaxReturn(-1, "系统异常，请稍候再试");
             }
         }
-        
+
     }
 }
