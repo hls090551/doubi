@@ -48,26 +48,26 @@ namespace Doubi.Service.ShoppingCarts
         }
 
         //加入购物车
-        public bool AddToShoppingCart(int userid, int pcid, int quantity)
+        public bool AddToShoppingCart(int userid, int proid, int quantity)
         {
-            if (userid <= 0 || pcid <= 0 || quantity <= 0)
+            if (userid <= 0 || proid <= 0 || quantity <= 0)
             {
                 return false;
             }
-            ShoppingCart cart = _cartRepository.GetShoppingCart(userid, pcid);
-            if (cart == null)
+            ShoppingCart cart = _cartRepository.GetShoppingCart(userid, proid);
+            Product pro = _proRepository.GetById(proid);
+            if (cart == null && pro != null && pro.Isonsale)
             {
-                Product pro = _proRepository.GetById(pcid);
                 if (pro == null)
                 {
                     return false;
                 }
                 cart = new ShoppingCart();
                 cart.Userid = userid;
-                cart.Pcid = pcid;
+                cart.Pcid = proid;
                 cart.Goodsname = pro.Pname;
                 cart.Quantity = quantity;
-                cart.Weigth = pro.Weight;
+                cart.Weigth = pro.Weight * quantity;
                 cart.Price = pro.Price;
                 cart.Needshipping = pro.Need_deliver;
                 cart.Addtime = DateTime.Now;
@@ -77,6 +77,8 @@ namespace Doubi.Service.ShoppingCarts
             else
             {
                 cart.Quantity = cart.Quantity + quantity;
+                cart.Weigth = pro.Weight * cart.Quantity;
+                cart.Addtime = DateTime.Now;
                 return _cartRepository.Update(cart);
             }
         }

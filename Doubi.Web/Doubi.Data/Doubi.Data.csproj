@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DAL\Base\LevelRepository.cs" />
     <Compile Include="DAL\Base\OrderChargeDoubiRepository.cs" />
+    <Compile Include="DAL\Base\OrderChargeRepository.cs" />
     <Compile Include="DAL\Base\OrderPaymentCardRepository.cs" />
     <Compile Include="DAL\Base\OrderPaymentRepository.cs" />
     <Compile Include="DAL\Base\OrderPaymentReturnRepository.cs" />

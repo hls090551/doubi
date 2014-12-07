@@ -8,7 +8,7 @@ using System.Xml;
 namespace Doubi.Core.Domain
 {	
 	
-	public partial class OrderChargeDoubi
+	public partial class OrderCharge
     
 	{	
 			public int Id
@@ -26,12 +26,22 @@ namespace Doubi.Core.Domain
 				get;
 				set;
 			}
-			public int Useraccountid
+			public string Account
 			{
 				get;
 				set;
 			}
 			public decimal Chargeamount
+			{
+				get;
+				set;
+			}
+			public short Type
+			{
+				get;
+				set;
+			}
+			public decimal Saleprice
 			{
 				get;
 				set;

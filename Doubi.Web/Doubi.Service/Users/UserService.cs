@@ -15,6 +15,7 @@ namespace Doubi.Service.Users
     public class UserService
     {
         private readonly UserRepository<User> _userRepository;
+        private readonly UserAccountRepository<UserAccount> _useraccountRep;
         private readonly UserRecommandRepository<UserRecommand> _recoRepository;
         private readonly EncryptionService _e;
 
@@ -22,6 +23,7 @@ namespace Doubi.Service.Users
         {
             _userRepository = new UserRepository<User>();
             _recoRepository = new UserRecommandRepository<UserRecommand>();
+            _useraccountRep = new UserAccountRepository<UserAccount>();
             _e = new EncryptionService(new SecuritySettings());
         }
 
@@ -32,6 +34,15 @@ namespace Doubi.Service.Users
                 return null;
             }
             return _userRepository.GetByUsername(username, status);
+        }
+
+        public User GetUserid(int userid)
+        {
+            if (userid <= 0)
+            {
+                return null;
+            }
+            return _userRepository.GetById(userid);
         }
 
         public User ValidatUser(string username, string pwd)
@@ -96,13 +107,22 @@ namespace Doubi.Service.Users
                         user_reco.Totalcontribute = 0;
                         user_reco.Createtime = DateTime.Now;
 
-                        _recoRepository.InsertWithTransaction(user_reco, context);                        
+                        _recoRepository.InsertWithTransaction(user_reco, context);
                     }
                     context.Commit();
                     return user;
                 }
             }
             return null;
+        }
+
+        public UserAccount GetUserAccount(int userid)
+        {
+            if (userid <= 0)
+            {
+                throw new ArgumentException("GetUserAccount args error");
+            }
+            return _useraccountRep.GetByUserid(userid);
         }
     }
 }

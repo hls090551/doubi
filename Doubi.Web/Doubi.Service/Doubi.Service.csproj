@@ -44,6 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="level\LevelService.cs" />
+    <Compile Include="Orders\OrderSerivce.cs" />
+    <Compile Include="Orders\PlaceOrderRequest.cs" />
+    <Compile Include="Orders\PlaceOrderResult.cs" />
+    <Compile Include="Orders\PlaceOrderService.cs" />
     <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\EncryptionService.cs" />
@@ -54,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewFolder1\" />
-    <Folder Include="Orders\" />
+    <Folder Include="Payment\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Doubi.Core\Doubi.Core.csproj">

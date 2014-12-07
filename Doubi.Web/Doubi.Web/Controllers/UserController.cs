@@ -6,16 +6,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Doubi.Core.Domain;
+using Doubi.Service.ShoppingCarts;
+using Doubi.Service.Products;
 
 namespace Doubi.Web.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly UserService _us;
+        private readonly ShoppingCartService _cartservice;
+        private readonly ProductService _proservice;
 
         public UserController()
         {
             _us = new UserService();
+            _cartservice = new ShoppingCartService();
+            _proservice = new ProductService();
         }
 
         public ActionResult Login()
@@ -166,5 +172,77 @@ namespace Doubi.Web.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 用户购物车
+        /// </summary>
+        /// <returns></returns>
+        public string ShoppingCart()
+        {
+            if (Session["CurrentUser"] == null)
+            {
+                return "";
+            }
+            User customer = GetCurrentCustomer();
+            var cartitems = _cartservice.UserShoppingCarts(customer.Id);
+            string jss = Serializer(cartitems);
+            return jss;
+        }
+
+        /// <summary>
+        /// 添加用户购物车
+        /// </summary>
+        /// <param name="proid"></param>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
+        public string Addcart(int proid, int quantity)
+        {
+            HandleAnonym();
+            int userid = GetCurrentCustomerId();
+            if (proid <= 0 || quantity <= 0)
+            {
+                return "";
+            }
+            Product product = _proservice.GetProduct(proid);
+            if (product == null || product.Isonsale == false)
+            {
+                return AjaxReturn(-1, "商品已经下架");
+            }
+            if (product.Inventory < quantity)
+            {
+                return AjaxReturn(-1, "库存数量不足");
+            }
+            bool res = _cartservice.AddToShoppingCart(userid, proid, quantity);
+            if (res)
+            {
+                return AjaxReturn(0, "添加商品成功");
+            }
+            return AjaxReturn(-1, "系统异常，请稍候再试");
+        }
+
+        /// <summary>
+        /// 删除购物车数据
+        /// </summary>
+        /// <param name="cartid"></param>
+        /// <returns></returns>
+        public string Outcart(int cartid)
+        {
+            HandleAnonym();
+            int userid = GetCurrentCustomerId();
+            if (cartid <= 0)
+            {
+                return AjaxReturn(-1, "商品已删除");
+            }
+            bool res = _cartservice.DeleteFromShoppingCart(userid, cartid);
+            if (res)
+            {
+                return AjaxReturn(0, "商品已从购物车删除");
+            }
+            else
+            {
+                return AjaxReturn(-1, "系统异常，请稍候再试");
+            }
+        }
+        
     }
 }

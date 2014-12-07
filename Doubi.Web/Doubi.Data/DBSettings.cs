@@ -16,5 +16,11 @@ namespace Doubi.Data
             return new DbContext().ConnectionStringName(ConnectionStringName,
                     new SqlServerProvider()).UseTransaction(true);
         }
+
+        public static IDbContext TransactionContext(IsolationLevel level)
+        {
+            return new DbContext().ConnectionStringName(ConnectionStringName,
+                    new SqlServerProvider()).IsolationLevel(level).UseTransaction(true);
+        }
     }
 }

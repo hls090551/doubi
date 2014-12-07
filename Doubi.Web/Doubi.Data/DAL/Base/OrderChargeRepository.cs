@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Doubi.Data.DAL
 {
-    public partial class OrderPaymentRepository<T> : IRepository<T> where T : OrderPayment
+    public partial class OrderChargeRepository<T> : IRepository<T> where T : OrderCharge
     {
         public delegate void EntityEventHandler(object sender, EntityEventArgs<T> e);
 
@@ -47,7 +47,7 @@ namespace Doubi.Data.DAL
         {
             using (var context = Context())
             {
-                T entity = context.Sql(@"select * from order_payment where id=@id").Parameter("id", id).QuerySingle<T>();
+                T entity = context.Sql(@"select * from order_charge where id=@id").Parameter("id", id).QuerySingle<T>();
                 return entity;
             }
         }
@@ -60,14 +60,14 @@ namespace Doubi.Data.DAL
 
             using (var context = Context())
             {
-                int id = context.Insert("order_payment")
+                int id = context.Insert("order_charge")
                         .Column("orderid",entity.Orderid)
-                        .Column("amount",entity.Amount)
-                        .Column("paymenttype",entity.Paymenttype)
-                        .Column("paymentstatus",entity.Paymentstatus)
-                        .Column("associateid",entity.Associateid)
+                        .Column("userid",entity.Userid)
+                        .Column("account",entity.Account)
+                        .Column("chargeamount",entity.Chargeamount)
+                        .Column("type",entity.Type)
+                        .Column("saleprice",entity.Saleprice)
                         .Column("createtime",entity.Createtime)
-                        .Column("updatetime",entity.Updatetime)
                         .ExecuteReturnLastId<int>();
 
                 entity.Id = id;
@@ -80,14 +80,14 @@ namespace Doubi.Data.DAL
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            int id = context.Insert("order_payment")
+            int id = context.Insert("order_charge")
                         .Column("orderid",entity.Orderid)
-                        .Column("amount",entity.Amount)
-                        .Column("paymenttype",entity.Paymenttype)
-                        .Column("paymentstatus",entity.Paymentstatus)
-                        .Column("associateid",entity.Associateid)
+                        .Column("userid",entity.Userid)
+                        .Column("account",entity.Account)
+                        .Column("chargeamount",entity.Chargeamount)
+                        .Column("type",entity.Type)
+                        .Column("saleprice",entity.Saleprice)
                         .Column("createtime",entity.Createtime)
-                        .Column("updatetime",entity.Updatetime)
                     .ExecuteReturnLastId<int>();
 
             entity.Id = id;
@@ -101,14 +101,14 @@ namespace Doubi.Data.DAL
             if (context == null)
                 throw new ArgumentNullException("entity");
 
-            int id = context.Insert("order_payment")
+            int id = context.Insert("order_charge")
                         .Column("orderid",entity.Orderid)
-                        .Column("amount",entity.Amount)
-                        .Column("paymenttype",entity.Paymenttype)
-                        .Column("paymentstatus",entity.Paymentstatus)
-                        .Column("associateid",entity.Associateid)
+                        .Column("userid",entity.Userid)
+                        .Column("account",entity.Account)
+                        .Column("chargeamount",entity.Chargeamount)
+                        .Column("type",entity.Type)
+                        .Column("saleprice",entity.Saleprice)
                         .Column("createtime",entity.Createtime)
-                        .Column("updatetime",entity.Updatetime)
                     .ExecuteReturnLastId<int>();
 
             entity.Id = id;
@@ -158,14 +158,14 @@ namespace Doubi.Data.DAL
 
             using (var context = Context())
             {
-                return context.Update("order_payment")
+                return context.Update("order_charge")
                         .Column("orderid",entity.Orderid)
-                        .Column("amount",entity.Amount)
-                        .Column("paymenttype",entity.Paymenttype)
-                        .Column("paymentstatus",entity.Paymentstatus)
-                        .Column("associateid",entity.Associateid)
+                        .Column("userid",entity.Userid)
+                        .Column("account",entity.Account)
+                        .Column("chargeamount",entity.Chargeamount)
+                        .Column("type",entity.Type)
+                        .Column("saleprice",entity.Saleprice)
                         .Column("createtime",entity.Createtime)
-                        .Column("updatetime",entity.Updatetime)
                     .Where("Id",entity.Id)
                     .Execute() > 0;
             }
@@ -179,14 +179,14 @@ namespace Doubi.Data.DAL
             if (context == null)
                 throw new ArgumentNullException("entity");
 
-            context.Update("order_payment")
+            context.Update("order_charge")
                         .Column("orderid",entity.Orderid)
-                        .Column("amount",entity.Amount)
-                        .Column("paymenttype",entity.Paymenttype)
-                        .Column("paymentstatus",entity.Paymentstatus)
-                        .Column("associateid",entity.Associateid)
+                        .Column("userid",entity.Userid)
+                        .Column("account",entity.Account)
+                        .Column("chargeamount",entity.Chargeamount)
+                        .Column("type",entity.Type)
+                        .Column("saleprice",entity.Saleprice)
                         .Column("createtime",entity.Createtime)
-                        .Column("updatetime",entity.Updatetime)
                      .Where("Id",entity.Id)
                      .Execute();
         }
@@ -198,7 +198,7 @@ namespace Doubi.Data.DAL
 
             using (var context = Context())
             {
-                return context.Sql(" DELETE FROM order_payment WHERE id = @id ")
+                return context.Sql(" DELETE FROM order_charge WHERE id = @id ")
                     .Parameter("id", entity.Id)
                     .Execute() > 0;
             }
@@ -212,7 +212,7 @@ namespace Doubi.Data.DAL
             }
             using (var context = Context())
             {
-                return context.Sql(" DELETE FROM order_payment WHERE id = @id ")
+                return context.Sql(" DELETE FROM order_charge WHERE id = @id ")
                     .Parameter("id", id)
                     .Execute() > 0;
             }
@@ -233,7 +233,7 @@ namespace Doubi.Data.DAL
             using (var context = Context())
             {
                 var select = context.Select<T>(" * ")
-                        .From(" order_payment ");
+                        .From(" order_charge ");
 
                 if (maximumRows > 0)
                 {
@@ -255,7 +255,7 @@ namespace Doubi.Data.DAL
         {
             using (var context = Context())
             {               
-                return context.Sql(" SELECT COUNT(*) FROM order_payment where " + fieldname + " = @" + fieldname)
+                return context.Sql(" SELECT COUNT(*) FROM order_charge where " + fieldname + " = @" + fieldname)
                               .Parameter(fieldname, fieldvalue)
                               .QuerySingle<int>();
             }
@@ -278,7 +278,7 @@ namespace Doubi.Data.DAL
             using (var context = Context())
             {
                 var select = context.Select<T>(" * ")
-                        .From("order_payment")
+                        .From("order_charge")
                         .Where(" " + fieldname + " = @" + fieldname + " ")
                         .Parameter(fieldname, fieldvalue);
 

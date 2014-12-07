@@ -70,7 +70,7 @@
     <Compile Include="Collections\TreeNode.cs" />
     <Compile Include="Domain\Base\Level.cs" />
     <Compile Include="Domain\Base\Order.cs" />
-    <Compile Include="Domain\Base\OrderChargeDoubi.cs" />
+    <Compile Include="Domain\Base\OrderCharge.cs" />
     <Compile Include="Domain\Base\OrderPayment.cs" />
     <Compile Include="Domain\Base\OrderPaymentCard.cs" />
     <Compile Include="Domain\Base\OrderPaymentReturn.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="Infrastructure\SmartStoreEngine.cs" />
     <Compile Include="Infrastructure\ValueObject.cs" />
     <Compile Include="MyEnum\MessageType.cs" />
+    <Compile Include="MyEnum\OrderchargeType.cs" />
     <Compile Include="MyEnum\OrderStatus.cs" />
     <Compile Include="MyEnum\Ordertype.cs" />
     <Compile Include="MyEnum\PaymentCardType.cs" />

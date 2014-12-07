@@ -8,6 +8,7 @@ namespace Doubi.Web.Controllers
 {
     public class ProductController : Controller
     {
+
         public ActionResult Index()
         {
             return View();

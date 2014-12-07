@@ -53,7 +53,7 @@ namespace Doubi.Data.DAL
         }
 
 
-      public bool Insert(T entity)
+        public bool Insert(T entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");
@@ -61,13 +61,14 @@ namespace Doubi.Data.DAL
             using (var context = Context())
             {
                 int id = context.Insert("user_account_log")
-                        .Column("accountid",entity.Accountid)
-                        .Column("userid",entity.Userid)
-                        .Column("amount",entity.Amount)
-                        .Column("operatetype",entity.Operatetype)
-                        .Column("orderno",entity.Orderno)
-                        .Column("operatedesc",entity.Operatedesc)
-                        .Column("createtime",entity.Createtime)
+                        .Column("accountid", entity.Accountid)
+                        .Column("userid", entity.Userid)
+                        .Column("amount", entity.Amount)
+                        .Column("operatetype", entity.Operatetype)
+                        .Column("orderno", entity.Orderno)
+                        .Column("operatedesc", entity.Operatedesc)
+                        .Column("rest", entity.Rest)
+                        .Column("createtime", entity.Createtime)
                         .ExecuteReturnLastId<int>();
 
                 entity.Id = id;
@@ -81,13 +82,14 @@ namespace Doubi.Data.DAL
                 throw new ArgumentNullException("entity");
 
             int id = context.Insert("user_account_log")
-                        .Column("accountid",entity.Accountid)
-                        .Column("userid",entity.Userid)
-                        .Column("amount",entity.Amount)
-                        .Column("operatetype",entity.Operatetype)
-                        .Column("orderno",entity.Orderno)
-                        .Column("operatedesc",entity.Operatedesc)
-                        .Column("createtime",entity.Createtime)
+                        .Column("accountid", entity.Accountid)
+                        .Column("userid", entity.Userid)
+                        .Column("amount", entity.Amount)
+                        .Column("operatetype", entity.Operatetype)
+                        .Column("orderno", entity.Orderno)
+                        .Column("operatedesc", entity.Operatedesc)
+                        .Column("rest", entity.Rest)
+                        .Column("createtime", entity.Createtime)
                     .ExecuteReturnLastId<int>();
 
             entity.Id = id;
@@ -102,13 +104,14 @@ namespace Doubi.Data.DAL
                 throw new ArgumentNullException("entity");
 
             int id = context.Insert("user_account_log")
-                        .Column("accountid",entity.Accountid)
-                        .Column("userid",entity.Userid)
-                        .Column("amount",entity.Amount)
-                        .Column("operatetype",entity.Operatetype)
-                        .Column("orderno",entity.Orderno)
-                        .Column("operatedesc",entity.Operatedesc)
-                        .Column("createtime",entity.Createtime)
+                        .Column("accountid", entity.Accountid)
+                        .Column("userid", entity.Userid)
+                        .Column("amount", entity.Amount)
+                        .Column("operatetype", entity.Operatetype)
+                        .Column("orderno", entity.Orderno)
+                        .Column("operatedesc", entity.Operatedesc)
+                        .Column("rest", entity.Rest)
+                        .Column("createtime", entity.Createtime)
                     .ExecuteReturnLastId<int>();
 
             entity.Id = id;
@@ -158,14 +161,15 @@ namespace Doubi.Data.DAL
             using (var context = Context())
             {
                 return context.Update("user_account_log")
-                        .Column("accountid",entity.Accountid)
-                        .Column("userid",entity.Userid)
-                        .Column("amount",entity.Amount)
-                        .Column("operatetype",entity.Operatetype)
-                        .Column("orderno",entity.Orderno)
-                        .Column("operatedesc",entity.Operatedesc)
-                        .Column("createtime",entity.Createtime)
-                    .Where("Id",entity.Id)
+                        .Column("accountid", entity.Accountid)
+                        .Column("userid", entity.Userid)
+                        .Column("amount", entity.Amount)
+                        .Column("operatetype", entity.Operatetype)
+                        .Column("orderno", entity.Orderno)
+                        .Column("operatedesc", entity.Operatedesc)
+                        .Column("rest", entity.Rest)
+                        .Column("createtime", entity.Createtime)
+                    .Where("Id", entity.Id)
                     .Execute() > 0;
             }
         }
@@ -179,14 +183,15 @@ namespace Doubi.Data.DAL
                 throw new ArgumentNullException("entity");
 
             context.Update("user_account_log")
-                        .Column("accountid",entity.Accountid)
-                        .Column("userid",entity.Userid)
-                        .Column("amount",entity.Amount)
-                        .Column("operatetype",entity.Operatetype)
-                        .Column("orderno",entity.Orderno)
-                        .Column("operatedesc",entity.Operatedesc)
-                        .Column("createtime",entity.Createtime)
-                     .Where("Id",entity.Id)
+                        .Column("accountid", entity.Accountid)
+                        .Column("userid", entity.Userid)
+                        .Column("amount", entity.Amount)
+                        .Column("operatetype", entity.Operatetype)
+                        .Column("orderno", entity.Orderno)
+                        .Column("operatedesc", entity.Operatedesc)
+                        .Column("rest", entity.Rest)
+                        .Column("createtime", entity.Createtime)
+                     .Where("Id", entity.Id)
                      .Execute();
         }
 
@@ -202,9 +207,9 @@ namespace Doubi.Data.DAL
                     .Execute() > 0;
             }
         }
-        
-         public bool Delete(int id)
-         {
+
+        public bool Delete(int id)
+        {
             if (id <= 0)
             {
                 throw new ArgumentNullException("id error");
@@ -215,7 +220,7 @@ namespace Doubi.Data.DAL
                     .Parameter("id", id)
                     .Execute() > 0;
             }
-         }
+        }
 
         public List<T> SelectAll()
         {
@@ -228,7 +233,7 @@ namespace Doubi.Data.DAL
         }
 
         public List<T> SelectAll(int pageIndex, int maximumRows, string sortExpression)
-        {            
+        {
             using (var context = Context())
             {
                 var select = context.Select<T>(" * ")
@@ -237,7 +242,7 @@ namespace Doubi.Data.DAL
                 if (maximumRows > 0)
                 {
                     if (pageIndex <= 0)
-                        pageIndex=1;
+                        pageIndex = 1;
 
                     select.Paging(pageIndex, maximumRows);
                 }
@@ -249,30 +254,30 @@ namespace Doubi.Data.DAL
                 return select.QueryMany();
             }
         }
-        
+
         public int CountByField(string fieldname, object fieldvalue)
         {
             using (var context = Context())
-            {               
+            {
                 return context.Sql(" SELECT COUNT(*) FROM user_account_log where " + fieldname + " = @" + fieldname)
                               .Parameter(fieldname, fieldvalue)
                               .QuerySingle<int>();
             }
         }
-        
+
         public List<T> SelectByField(string fieldname, object fieldvalue)
         {
             return SelectByField(fieldname, fieldvalue, string.Empty);
         }
-        
-         public List<T> SelectByField(string fieldname, object fieldvalue,string sortExpression)
+
+        public List<T> SelectByField(string fieldname, object fieldvalue, string sortExpression)
         {
             return SelectByField(fieldname, fieldvalue, 0, 0, sortExpression);
         }
-        
+
 
         public List<T> SelectByField(string fieldname, object fieldvalue, int pageIndex, int maximumRows, string sortExpression)
-        {            
+        {
             List<T> result = null;
             using (var context = Context())
             {
@@ -284,7 +289,7 @@ namespace Doubi.Data.DAL
                 if (maximumRows > 0)
                 {
                     if (pageIndex <= 0)
-                        pageIndex=1;
+                        pageIndex = 1;
 
                     select.Paging(pageIndex, maximumRows);
                 }

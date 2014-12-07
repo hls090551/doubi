@@ -95,7 +95,7 @@ namespace Doubi.Data.DAL
             entity.Id = id;
         }
 
-        public void InsertWithTransaction(T entity, IDbContext context)
+        public bool InsertWithTransaction(T entity, IDbContext context)
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");
@@ -115,6 +115,7 @@ namespace Doubi.Data.DAL
                     .ExecuteReturnLastId<int>();
 
             entity.Id = id;
+            return id > 0;
         }
 
         public void InsertRange(IEnumerable<T> entities, int batchSize = 100)
